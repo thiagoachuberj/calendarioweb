@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+	<h:head>
+		<title>Cadastrar Usuario</title>
+	</h:head>
+	<h:body>
+		<h:form id="Form">
+			<h:panelGrid columns="2">
+				<h:outputText value="Cadastrar Usuário"/> <br></br>
+				<h:outputText value="Login" />
+				<h:inputText value="#{usuarioBean.login}"/>
+				<h:outputText value="Senha" />
+				<h:inputText value="#{usuarioBean.senha}"/>
+				<h:outputText value="nome" />
+				<h:inputText value="#{usuarioBean.nome}"/>
+				<h:outputText value="telefone" />
+				<h:inputText value="#{usuarioBean.telefone}"/>
+				
+				<h:commandButton value="Cadastrar Usuário" action="#{usuarioBean.cadastrarUsuario()}" />
+			</h:panelGrid>
+		</h:form>
+	</h:body>
+</html>
