@@ -18,7 +18,6 @@ public class GerenciadorUsuarioDAO extends AbstractDAO implements UsuarioDAO {
 		this.manager = manager;
 	}
 	
-	@Override
 	public UsuarioTO buscarUsuarioPorLogin(String loginUsuario)	throws BusinessException {
 		UsuarioEntity entity = manager.find(UsuarioEntity.class, Integer.parseInt(loginUsuario));
 		UsuarioTO to = null;
@@ -28,7 +27,6 @@ public class GerenciadorUsuarioDAO extends AbstractDAO implements UsuarioDAO {
 		return to;
 	}
 
-	@Override
 	public void criarUsuario(UsuarioTO usuarioTO) throws BusinessException {
 		UsuarioEntity entity = (UsuarioEntity) convertaTOParaEntity(usuarioTO);
 		manager.persist(entity);

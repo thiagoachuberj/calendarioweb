@@ -23,13 +23,11 @@ public class UsuarioFacadeBean implements Usuario {
 		return dao;
 	}
 	
-	@Override
 	public UsuarioTO buscarUsuarioPorLogin(String loginUsuario)	throws BusinessException {
 		UsuarioTO to = getUsuarioDAO().buscarUsuarioPorLogin(loginUsuario);
 		return to;
 	}
 
-	@Override
 	public void criarUsuario(UsuarioTO usuarioTO) throws BusinessException {
 		getUsuarioDAO().criarUsuario(usuarioTO);
 	}
