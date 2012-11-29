@@ -5,8 +5,8 @@
   <artifactId>CalendWeb</artifactId>
   <packaging>war</packaging>
   <version>0.0.1-SNAPSHOT</version>
-  <name>CalendWeb Maven Webapp</name>
-  <url>http://maven.apache.org</url>
+  <name>CalendWeb</name>
+
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
@@ -69,6 +69,12 @@
     	<artifactId>asm-commons</artifactId>
     	<version>3.1</version>
     </dependency>
+	<dependency>
+	    <groupId>javax</groupId>
+	    <artifactId>javaee-api</artifactId>
+	    <version>6.0</version>
+	    <scope>provided</scope>
+	</dependency>
   </dependencies>
   <build>
     <finalName>CalendWeb</finalName>
