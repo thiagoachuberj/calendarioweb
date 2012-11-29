@@ -7,7 +7,7 @@
 		<class>br.com.calendweb.evento.entity.EventoEntity</class>
 		<class>br.com.calendweb.usuario.entity.UsuarioEntity</class>
 		<properties>
-			<!-- property name="hibernate.hbm2ddl.auto" value="create" / -->
+			<!-- XXXXXXX property name="hibernate.hbm2ddl.auto" value="create" / -->
 			<property name="hibernate.show_sql" value="true" />
         </properties>
 		
