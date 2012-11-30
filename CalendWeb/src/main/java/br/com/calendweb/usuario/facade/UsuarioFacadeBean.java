@@ -10,35 +10,60 @@ import javax.persistence.Persistence;
 import br.com.calendweb.dao.FactoryDAO;
 import br.com.calendweb.exceptions.BusinessException;
 import br.com.calendweb.login.to.LoginTO;
-import br.com.calendweb.usuario.dao.UsuarioDAO;
+import br.com.calendweb.usuario.Usuario;
 import br.com.calendweb.usuario.to.UsuarioTO;
 
+/**
+ * Classe EJB responsavel por disponibilizar os servicos de usuario.
+ * 
+ * @author MM
+ */
 @Stateless
-public class UsuarioFacadeBean implements Usuario {
+public class UsuarioFacadeBean implements UsuarioLocal {
 
 	@EJB
 	private FactoryDAO factoryDAO;
 	
-	private UsuarioDAO getUsuarioDAO() {
-		UsuarioDAO dao = factoryDAO.getUsuarioDAO();
+	/**
+	 * Recupera a instancia do usuarioDAO.
+	 * 
+	 * @return UsuarioDAO 
+	 */
+	private Usuario getUsuario() {
+		Usuario dao = factoryDAO.getUsuario();
 		return dao;
 	}
 	
+	@Override
 	public UsuarioTO buscarUsuarioPorLogin(LoginTO loginTO)	throws BusinessException {
-		UsuarioTO to = getUsuarioDAO().buscarUsuarioPorLogin(loginTO);
+		UsuarioTO to = getUsuario().buscarUsuarioPorLogin(loginTO);
 		return to;
 	}
-
-	public void criarUsuario(UsuarioTO usuarioTO) throws BusinessException {
-		getUsuarioDAO().criarUsuario(usuarioTO);
-	}
 	
+	@Override
+	public void atualizaUsuario(UsuarioTO usuarioTO) throws BusinessException {
+		getUsuario().atualizaUsuario(usuarioTO);
+		
+	}
+
+	@Override
+	public void cadastraUsuario(UsuarioTO usuarioTO) throws BusinessException {
+		getUsuario().cadastraUsuario(usuarioTO);
+	}
+
+	@Override
 	public void setEntityManager(EntityManager manager) {
 //		GerenciadorUsuarioDAO dao = GerenciadorUsuarioDAO.getInstance();
-		getUsuarioDAO().setEntityManager(manager);
+		getUsuario().setEntityManager(manager);
 	}
 	
-	public static void main (String []args) throws BusinessException {
+	/**
+	 * Metodo standalone para realizacao de testes.
+	 * 
+	 * @param args 
+	 * @throws BusinessException 
+	 */
+	public static void main(String []args) throws BusinessException {
 		EntityManager manager = null;
 		EntityManagerFactory factory = null;
 		EntityTransaction transaction = null;
@@ -57,9 +82,7 @@ public class UsuarioFacadeBean implements Usuario {
 //		
 //		System.out.println(to.getLoginUsuario());
 //		System.out.println(to.getEmailUsuario());
-		
-		
-		
+				
 		transaction.commit();
 	}
 

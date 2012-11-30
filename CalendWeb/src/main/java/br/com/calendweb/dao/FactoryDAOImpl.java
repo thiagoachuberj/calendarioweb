@@ -4,17 +4,37 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import br.com.calendweb.usuario.Usuario;
 import br.com.calendweb.usuario.dao.GerenciadorUsuarioDAO;
-import br.com.calendweb.usuario.dao.UsuarioDAO;
 
+/**
+ * Factory responsável por disponibilizar os objetos para acesso via EJB Local.
+ * 
+ * @author MM
+ */
 @Stateless
 public class FactoryDAOImpl implements FactoryDAO {
 	
-	@PersistenceContext(unitName="calendWebUnit")
-	protected EntityManager manager;
+	@PersistenceContext(unitName = "calendWebUnit")
+	private EntityManager manager;
 	
-	public UsuarioDAO getUsuarioDAO() {
+	@Override
+	public Usuario getUsuario() {
 		return new GerenciadorUsuarioDAO(manager);
+	}
+
+	/**
+	 * @return the manager
+	 */
+	public EntityManager getManager() {
+		return manager;
+	}
+
+	/**
+	 * @param manager the manager to set
+	 */
+	public void setManager(EntityManager manager) {
+		this.manager = manager;
 	}
 
 }

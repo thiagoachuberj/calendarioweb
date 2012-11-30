@@ -1,6 +1,5 @@
-package br.com.calendweb.usuario.dao;
+package br.com.calendweb.usuario;
 
-import javax.ejb.Local;
 import javax.persistence.EntityManager;
 
 import br.com.calendweb.exceptions.BusinessException;
@@ -8,12 +7,12 @@ import br.com.calendweb.login.to.LoginTO;
 import br.com.calendweb.usuario.to.UsuarioTO;
 
 /**
- * Interface Local para o objeto usuario.
+ * Interface do objeto Usuario.
+ * 
  * @author MM
  */
-@Local
-public interface UsuarioDAO {
-
+public interface Usuario {
+	
 	/**
 	 * Atualiza os dados cadastrais do cliente na base de dados.
 	 * 
@@ -45,5 +44,4 @@ public interface UsuarioDAO {
 	 * @param manager 
 	 */
 	void setEntityManager(EntityManager manager);
-	
 }

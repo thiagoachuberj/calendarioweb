@@ -4,34 +4,59 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import br.com.calendweb.dao.AbstractDAO;
 import br.com.calendweb.evento.entity.EventoEntity;
 import br.com.calendweb.exceptions.BusinessException;
+import br.com.calendweb.login.to.LoginTO;
 import br.com.calendweb.to.BaseTO;
+import br.com.calendweb.usuario.Usuario;
 import br.com.calendweb.usuario.entity.UsuarioEntity;
 import br.com.calendweb.usuario.to.UsuarioTO;
 
-public class GerenciadorUsuarioDAO extends AbstractDAO implements UsuarioDAO {
+/**
+ * Classe responsável po gerenciar todas as funções relacionadas ao usuário.
+ * 
+ * @author MM
+ */
+public class GerenciadorUsuarioDAO extends AbstractDAO implements Usuario {
 
-	public GerenciadorUsuarioDAO (EntityManager manager) {
-		this.manager = manager;
+	/**
+	 * Construtor.
+	 * @param manager 
+	 */
+	public GerenciadorUsuarioDAO(EntityManager manager) {
+		this.setManager(manager);
 	}
 	
-	public UsuarioTO buscarUsuarioPorLogin(String loginUsuario)	throws BusinessException {
-		UsuarioEntity entity = manager.find(UsuarioEntity.class, Integer.parseInt(loginUsuario));
+	@Override
+	public UsuarioTO buscarUsuarioPorLogin(LoginTO loginTO)	throws BusinessException {
+		Query query = getManager().createNamedQuery("consultaUsuario");
+		query.setParameter("login", loginTO.getLogin());
+		query.setParameter("senha", loginTO.getSenha());
+		UsuarioEntity entity = (UsuarioEntity) query.getSingleResult();
+		
 		UsuarioTO to = null;
 		if (entity != null) {
 			to = (UsuarioTO) convertaEntityParaTO(to);
 		}
+		
 		return to;
 	}
 
-	public void criarUsuario(UsuarioTO usuarioTO) throws BusinessException {
+	@Override
+	public void cadastraUsuario(UsuarioTO usuarioTO) throws BusinessException {
 		UsuarioEntity entity = (UsuarioEntity) convertaTOParaEntity(usuarioTO);
-		manager.persist(entity);
+		getManager().persist(entity);
 	}
 
+	@Override
+	public void atualizaUsuario(UsuarioTO usuarioTO) throws BusinessException {
+		UsuarioEntity entity = (UsuarioEntity) convertaTOParaEntity(usuarioTO);
+		getManager().merge(entity);
+	}
+	
 	@Override
 	public Object convertaTOParaEntity(BaseTO to) {
 		UsuarioEntity entity = new UsuarioEntity();
@@ -76,8 +101,9 @@ public class GerenciadorUsuarioDAO extends AbstractDAO implements UsuarioDAO {
 		return to;
 	}
 	
+	@Override
 	public void setEntityManager(EntityManager manager) {
-		this.manager = manager;
+		this.setManager(manager);
 	}
 
 }
