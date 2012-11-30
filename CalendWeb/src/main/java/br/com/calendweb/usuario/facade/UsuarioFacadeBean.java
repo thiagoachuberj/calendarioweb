@@ -9,6 +9,7 @@ import javax.persistence.Persistence;
 
 import br.com.calendweb.dao.FactoryDAO;
 import br.com.calendweb.exceptions.BusinessException;
+import br.com.calendweb.login.to.LoginTO;
 import br.com.calendweb.usuario.dao.UsuarioDAO;
 import br.com.calendweb.usuario.to.UsuarioTO;
 
@@ -23,8 +24,8 @@ public class UsuarioFacadeBean implements Usuario {
 		return dao;
 	}
 	
-	public UsuarioTO buscarUsuarioPorLogin(String loginUsuario)	throws BusinessException {
-		UsuarioTO to = getUsuarioDAO().buscarUsuarioPorLogin(loginUsuario);
+	public UsuarioTO buscarUsuarioPorLogin(LoginTO loginTO)	throws BusinessException {
+		UsuarioTO to = getUsuarioDAO().buscarUsuarioPorLogin(loginTO);
 		return to;
 	}
 
@@ -52,10 +53,10 @@ public class UsuarioFacadeBean implements Usuario {
 		transaction.begin();
 		
 		//consultaUsuario por id
-		UsuarioTO to = facade.buscarUsuarioPorLogin("1");
-		
-		System.out.println(to.getLoginUsuario());
-		System.out.println(to.getEmailUsuario());
+//		UsuarioTO to = facade.buscarUsuarioPorLogin("1");
+//		
+//		System.out.println(to.getLoginUsuario());
+//		System.out.println(to.getEmailUsuario());
 		
 		
 		

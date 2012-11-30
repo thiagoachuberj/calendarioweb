@@ -13,7 +13,7 @@ import br.com.calendweb.usuario.to.UsuarioTO;
 public class UsuarioManagedBean {
 
 	@EJB
-	private Usuario usuarioDAO;
+	private Usuario usuarioFacade;
 	private String login;
 	private String senha;
 	private String nome;
@@ -22,7 +22,7 @@ public class UsuarioManagedBean {
 	
 	public String cadastrarUsuario() throws BusinessException {
 		
-		//FacesContext context = FacesContext.getCurrentInstance();
+//		FacesContext context = FacesContext.getCurrentInstance();
 //		Application application = context.getApplication();
 		
 		UsuarioTO usuarioTO = new UsuarioTO();
@@ -31,9 +31,17 @@ public class UsuarioManagedBean {
 		usuarioTO.setSenhaUsuario(senha);
 		usuarioTO.setTelefoneUsuario(telefone);
 		
-		usuarioDAO.criarUsuario(usuarioTO);
+		try {
+			usuarioFacade.criarUsuario(usuarioTO);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
 		
 		return "sucesso";
+	}
+	
+	public String consultaTodosUsuario() throws BusinessException {
+		return "listaUsuarios";
 	}
 
 
