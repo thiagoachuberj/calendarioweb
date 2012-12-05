@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import br.com.calendweb.dao.AbstractDAO;
@@ -32,16 +33,19 @@ public class GerenciadorUsuarioDAO extends AbstractDAO implements Usuario {
 	
 	@Override
 	public UsuarioTO buscarUsuarioPorLogin(LoginTO loginTO)	throws BusinessException {
-		Query query = getManager().createNamedQuery("consultaUsuario");
-		query.setParameter("login", loginTO.getLogin());
-		query.setParameter("senha", loginTO.getSenha());
-		UsuarioEntity entity = (UsuarioEntity) query.getSingleResult();
-		
 		UsuarioTO to = null;
-		if (entity != null) {
-			to = (UsuarioTO) convertaEntityParaTO(to);
-		}
 		
+		try {
+			Query query = getManager().createNamedQuery("consultaUsuario");
+			query.setParameter("login", loginTO.getLogin());
+			query.setParameter("senha", loginTO.getSenha());
+			
+			UsuarioEntity entity = (UsuarioEntity) query.getSingleResult();
+			to = (UsuarioTO) convertaEntityParaTO(entity);
+		} catch (NoResultException ex) {
+			return null;
+		}
+
 		return to;
 	}
 

@@ -17,7 +17,7 @@ public class UsuarioTO extends BaseTO {
 
 	private String nomeUsuario;
 
-	private String senhaUsuario;
+	private byte[] senhaUsuario;
 
 	private String telefoneUsuario;
 
@@ -56,11 +56,11 @@ public class UsuarioTO extends BaseTO {
 		this.nomeUsuario = nomeUsuario;
 	}
 
-	public String getSenhaUsuario() {
+	public byte[] getSenhaUsuario() {
 		return senhaUsuario;
 	}
 
-	public void setSenhaUsuario(String senhaUsuario) {
+	public void setSenhaUsuario(byte[] senhaUsuario) {
 		this.senhaUsuario = senhaUsuario;
 	}
 

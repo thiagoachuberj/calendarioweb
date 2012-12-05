@@ -23,9 +23,9 @@ import br.com.calendweb.evento.entity.EventoEntity;
 @NamedNativeQueries ({
 	@NamedNativeQuery (name  =  "consultaUsuario",
 						query  =  "select * from " 
-								+ "usuarios u "
-								+ " where u.login_usuario  =  ?login" 
-								+ " and u.senha_usuario  =  ?senha",
+								+ "usuario u "
+								+ " where u.login_usuario = :login " 
+								+ " and u.senha_usuario = :senha",
 						resultClass  =  UsuarioEntity.class) 
 })
 @Entity
@@ -48,7 +48,7 @@ public class UsuarioEntity implements Serializable {
 	private String nomeUsuario;
 
 	@Column(name = "SENHA_USUARIO")
-	private String senhaUsuario;
+	private byte[] senhaUsuario;
 
 	@Column(name = "TELEFONE_USUARIO")
 	private String telefoneUsuario;
@@ -122,14 +122,14 @@ public class UsuarioEntity implements Serializable {
 	/**
 	 * @return the senhaUsuario
 	 */
-	public String getSenhaUsuario() {
+	public byte[] getSenhaUsuario() {
 		return senhaUsuario;
 	}
 
 	/**
 	 * @param senhaUsuario the senhaUsuario to set
 	 */
-	public void setSenhaUsuario(String senhaUsuario) {
+	public void setSenhaUsuario(byte[] senhaUsuario) {
 		this.senhaUsuario = senhaUsuario;
 	}
 

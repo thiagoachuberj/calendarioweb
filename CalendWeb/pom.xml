@@ -76,6 +76,7 @@
 	    <scope>provided</scope>
 	</dependency>
   </dependencies>
+  
   <build>
     <finalName>CalendWeb</finalName>
     <plugins>
@@ -87,6 +88,51 @@
     			<targetJdk>1.6</targetJdk>
     		</configuration>
     	</plugin>
+    	<!-- 
+	      <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>jboss-maven-plugin</artifactId>
+            <configuration>
+               <jbossHome>C:\servers\jboss-as-7.1.1.Final</jbossHome>
+            </configuration>
+            <executions>
+               <execution>
+                  <id>jboss-deploy</id>
+                  <phase>pre-integration-test</phase>
+                  <goals>
+                     <goal>deploy</goal>
+                  </goals>
+                  <configuration>
+                     <fileName>${project.build.directory}/CalendWeb.war</fileName>
+                  </configuration>
+               </execution>
+               <execution>
+                  <id>jboss-undeploy</id>
+                  <phase>post-integration-test</phase>
+                  <goals>
+                     <goal>undeploy</goal>
+                  </goals>
+                  <configuration>
+                     <fileName>${project.build.directory}/CalendWeb.war</fileName>
+                  </configuration>
+               </execution>
+            </executions>
+         </plugin>
+         <plugin>
+         	<groupId>org.apache.maven.plugins</groupId>
+         	<artifactId>maven-compiler-plugin</artifactId>
+         	<version>2.3.2</version>
+         	<configuration>
+				<source>1.6</source>
+                <target>1.6</target>
+         	</configuration>
+         </plugin>
+         <plugin>
+         	<groupId>org.apache.maven.plugins</groupId>
+         	<artifactId>mavan-deploy-plugin</artifactId>
+         	<version>2.5</version>
+         </plugin>
+         -->
     </plugins>
   </build>
 </project>

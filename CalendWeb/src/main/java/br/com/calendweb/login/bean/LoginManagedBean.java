@@ -1,12 +1,18 @@
 package br.com.calendweb.login.bean;
 
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 
 import br.com.calendweb.exceptions.BusinessException;
 import br.com.calendweb.login.to.LoginTO;
-import br.com.calendweb.usuario.Usuario;
+import br.com.calendweb.usuario.bean.UsuarioManagedBean;
+import br.com.calendweb.usuario.facade.UsuarioFacadeBean;
+import br.com.calendweb.usuario.facade.UsuarioLocal;
+import br.com.calendweb.usuario.to.UsuarioTO;
 import br.com.calendweb.util.EncriptaSenha;
 
 /**
@@ -21,9 +27,17 @@ public class LoginManagedBean {
 
 	/** Recupera uma instancia do EJB. */
 	@EJB
-	private Usuario usuarioFacade;
+	private UsuarioLocal usuarioFacade;
 	private String login;
 	private String senha;
+	
+	@Inject
+	private UsuarioManagedBean usuarioBean;
+	private FacesContext faceContext;
+	
+	public LoginManagedBean() {
+		
+	}
 	
 	/**
 	 * Método responsável por realizar o login.
@@ -32,12 +46,22 @@ public class LoginManagedBean {
 	 * @throws BusinessException 
 	 */
 	public String realizaLogin() throws BusinessException {
+		faceContext = FacesContext.getCurrentInstance();
 		LoginTO loginTO = new LoginTO();
 		loginTO.setLogin(login);
 		loginTO.setSenha(EncriptaSenha.encriptaSenha(senha));
 		
-		usuarioFacade.buscarUsuarioPorLogin(loginTO);
-		return "paginaPrincipal";
+		UsuarioTO usuarioTO = usuarioFacade.buscarUsuarioPorLogin(loginTO);
+		
+		if (usuarioTO != null) {
+			usuarioBean.carregaUsuario(usuarioTO);
+			return "/pages/cadastrarUsuario?faces-redirect=true"; //saida para esta pagina .xhtml
+		} else {
+			FacesMessage fm  = new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuário não Encontrado.", "Usuário não Encontrado.");
+			faceContext.addMessage(null, fm);
+		}
+		
+		return null;
 	}
 
 	/**

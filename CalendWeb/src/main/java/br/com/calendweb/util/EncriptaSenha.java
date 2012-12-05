@@ -40,5 +40,10 @@ public class EncriptaSenha {
 		
 		return senhaEncriptada;
 	}
+	
+	public static void main(String []args) {
+		byte []senha = EncriptaSenha.encriptaSenha("123456");
+		System.out.println(senha.toString());
+	}
 
 }

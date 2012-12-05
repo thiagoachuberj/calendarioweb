@@ -1,12 +1,15 @@
 package br.com.calendweb.usuario.bean;
 
+import java.io.Serializable;
+
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
 import br.com.calendweb.exceptions.BusinessException;
-import br.com.calendweb.usuario.Usuario;
+import br.com.calendweb.usuario.facade.UsuarioLocal;
 import br.com.calendweb.usuario.to.UsuarioTO;
+import br.com.calendweb.util.EncriptaSenha;
 
 /**
  * 
@@ -15,14 +18,20 @@ import br.com.calendweb.usuario.to.UsuarioTO;
  */
 @RequestScoped
 @ManagedBean(name = "usuarioBean")
-public class UsuarioManagedBean {
+public class UsuarioManagedBean implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	@EJB
-	private Usuario usuarioFacade;
+	private UsuarioLocal usuarioFacade;
 	private String login;
 	private String senha;
 	private String nome;
 	private String telefone;
+	private UsuarioTO usuario;
 	
 	/**
 	 * Método responsável por realizar o cadastro de um usuario.
@@ -38,11 +47,12 @@ public class UsuarioManagedBean {
 		UsuarioTO usuarioTO = new UsuarioTO();
 		usuarioTO.setLoginUsuario(login);
 		usuarioTO.setNomeUsuario(nome);
-		usuarioTO.setSenhaUsuario(senha);
+		usuarioTO.setSenhaUsuario(EncriptaSenha.encriptaSenha(senha));
 		usuarioTO.setTelefoneUsuario(telefone);
 		
 		try {
 			usuarioFacade.cadastraUsuario(usuarioTO);
+			usuario = new UsuarioTO();
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
@@ -59,7 +69,16 @@ public class UsuarioManagedBean {
 	public String consultaTodosUsuario() throws BusinessException {
 		return "listaUsuarios";
 	}
-
+	
+	/**
+	 * Carrega o usuario.
+	 * 
+	 * @param usuarioTO
+	 */
+	public void carregaUsuario(UsuarioTO usuarioTO){
+		this.usuario = usuarioTO;
+	}
+	
 	/**
 	 * @return the login
 	 */
@@ -114,6 +133,20 @@ public class UsuarioManagedBean {
 	 */
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
+	}
+
+	/**
+	 * @return the usuario
+	 */
+	public UsuarioTO getUsuario() {
+		return usuario;
+	}
+
+	/**
+	 * @param usuario the usuario to set
+	 */
+	public void setUsuario(UsuarioTO usuario) {
+		this.usuario = usuario;
 	}
 
 }

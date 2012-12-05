@@ -3,24 +3,29 @@
  xmlns:xi="http://www.w3.org/2001/XInclude"
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
  <navigation-rule>
-  <from-view-id>/index.xhtml</from-view-id>
-  <navigation-case>
-   <from-outcome>cadastrarUsuario</from-outcome>
-   <to-view-id>/cadastrarUsuario.xhtml</to-view-id>
-  </navigation-case>
+	  <from-view-id>/index.xhtml</from-view-id>
+	  
+	  <navigation-case>
+		   <from-outcome>cadastrarUsuario</from-outcome>
+		   <to-view-id>/pages/cadastrarUsuario.xhtml</to-view-id>
+	  </navigation-case>
  </navigation-rule>
+ 
  <navigation-rule>
-  <from-view-id>/cadastrarUsuario.xhtml</from-view-id>
-  <navigation-case>
-   <from-outcome>sucesso</from-outcome>
-   <to-view-id>/pages/sucesso.xhtml</to-view-id>
-  </navigation-case>
+	  <from-view-id>/cadastrarUsuario.xhtml</from-view-id>
+	  
+	  <navigation-case>
+		   <from-outcome>sucesso</from-outcome>
+		   <to-view-id>/pages/sucesso.xhtml</to-view-id>
+	  </navigation-case>
  </navigation-rule>
+ 
  <navigation-rule>
-  <from-view-id>/pages/sucesso.xhtml</from-view-id>
-  <navigation-case>
-   <from-outcome>voltarHome</from-outcome>
-   <to-view-id>/index.xhtml</to-view-id>
-  </navigation-case>
+	  <from-view-id>/pages/sucesso.xhtml</from-view-id>
+	  
+	  <navigation-case>
+		   <from-outcome>voltarHome</from-outcome>
+		   <to-view-id>/index.xhtml</to-view-id>
+	  </navigation-case>
  </navigation-rule>
 </faces-config>

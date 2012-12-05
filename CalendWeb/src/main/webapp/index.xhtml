@@ -17,14 +17,27 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 	
 	<h:head>
 		<title>Index</title>
 	</h:head>
 	<h:body>
-		<h1>Seja Bem Vindo</h1>
-		
-		<h:link outcome="cadastrarUsuario" value="Cadastrar usuário"/>
+		<f:view>
+			<h1>Seja Bem Vindo</h1>
+			<div id="loginForm">
+				<h:message />
+				<h:form id="loginForm">
+					<h:panelGrid columns="2" width="100%" border="1">
+						<h:outputLabel value="Login:" for="login" />
+						<h:inputText id="login" value="#{loginBean.login}" required="true" label="Login" />
+						<h:outputLabel value="Senha:" for="senha" />
+						<h:inputSecret id="senha" value="#{loginBean.senha}" />
+					</h:panelGrid>
+					<h:commandButton id="logar"	value="Logar" action="#{loginBean.realizaLogin}" />
+				</h:form>
+			</div>
+		</f:view>
 	</h:body>      
 </html>
