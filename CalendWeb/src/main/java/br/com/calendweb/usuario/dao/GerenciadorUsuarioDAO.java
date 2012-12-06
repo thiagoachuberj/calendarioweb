@@ -105,6 +105,25 @@ public class GerenciadorUsuarioDAO extends AbstractDAO implements Usuario {
 		return to;
 	}
 	
+	public List<UsuarioTO> consultaTodosUsuarios() throws BusinessException {
+		Query query = getManager().createNamedQuery("consultaTodosUsuario");
+		@SuppressWarnings("unchecked")
+		List<UsuarioEntity> lstUsuarioEntity = (List<UsuarioEntity>) query.getResultList();
+		
+		List<UsuarioTO> lstUsuariosTO = new ArrayList<UsuarioTO>();
+		if (!lstUsuarioEntity.isEmpty()) {
+			for(UsuarioEntity entity: lstUsuarioEntity) {
+				UsuarioTO usuarioTO = (UsuarioTO) convertaEntityParaTO(entity);
+				
+				lstUsuariosTO.add(usuarioTO);
+			}
+		} else {
+			lstUsuariosTO = null;
+		}
+		
+		return lstUsuariosTO;
+	}
+	
 	@Override
 	public void setEntityManager(EntityManager manager) {
 		this.setManager(manager);

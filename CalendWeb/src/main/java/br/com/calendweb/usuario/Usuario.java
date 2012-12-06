@@ -1,5 +1,7 @@
 package br.com.calendweb.usuario;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 
 import br.com.calendweb.exceptions.BusinessException;
@@ -44,4 +46,12 @@ public interface Usuario {
 	 * @param manager 
 	 */
 	void setEntityManager(EntityManager manager);
+	
+	/**
+	 * Consulta todos os usuários.
+	 * 
+	 *  @return List<UsuarioTO>
+	 */
+	List<UsuarioTO> consultaTodosUsuarios() throws BusinessException;
+	
 }

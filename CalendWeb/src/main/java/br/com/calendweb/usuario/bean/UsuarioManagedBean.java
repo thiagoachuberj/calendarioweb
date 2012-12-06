@@ -1,6 +1,7 @@
 package br.com.calendweb.usuario.bean;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -9,6 +10,7 @@ import javax.faces.bean.RequestScoped;
 import br.com.calendweb.exceptions.BusinessException;
 import br.com.calendweb.usuario.facade.UsuarioLocal;
 import br.com.calendweb.usuario.to.UsuarioTO;
+import br.com.calendweb.util.Constantes;
 import br.com.calendweb.util.EncriptaSenha;
 
 /**
@@ -18,7 +20,7 @@ import br.com.calendweb.util.EncriptaSenha;
  */
 @RequestScoped
 @ManagedBean(name = "usuarioBean")
-public class UsuarioManagedBean implements Serializable{
+public class UsuarioManagedBean implements Serializable, Constantes{
 
 	/**
 	 * 
@@ -32,6 +34,7 @@ public class UsuarioManagedBean implements Serializable{
 	private String nome;
 	private String telefone;
 	private UsuarioTO usuario;
+	private List<UsuarioTO> lstUsuarioTO;
 	
 	/**
 	 * Método responsável por realizar o cadastro de um usuario.
@@ -57,7 +60,7 @@ public class UsuarioManagedBean implements Serializable{
 			ex.printStackTrace();
 		}
 		
-		return "sucesso";
+		return Constantes.SUCESSO;
 	}
 	
 	/**
@@ -67,7 +70,8 @@ public class UsuarioManagedBean implements Serializable{
 	 * @throws BusinessException 
 	 */
 	public String consultaTodosUsuario() throws BusinessException {
-		return "listaUsuarios";
+		lstUsuarioTO = usuarioFacade.consultaTodosUsuarios();
+		return Constantes.LISTA_USUARIOS;
 	}
 	
 	/**
@@ -147,6 +151,20 @@ public class UsuarioManagedBean implements Serializable{
 	 */
 	public void setUsuario(UsuarioTO usuario) {
 		this.usuario = usuario;
+	}
+
+	/**
+	 * @return the lstUsuarioTO
+	 */
+	public List<UsuarioTO> getLstUsuarioTO() {
+		return lstUsuarioTO;
+	}
+
+	/**
+	 * @param lstUsuarioTO the lstUsuarioTO to set
+	 */
+	public void setLstUsuarioTO(List<UsuarioTO> lstUsuarioTO) {
+		this.lstUsuarioTO = lstUsuarioTO;
 	}
 
 }

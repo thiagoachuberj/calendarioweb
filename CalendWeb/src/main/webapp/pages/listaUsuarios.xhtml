@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+	<h:head>
+		<title>Consulta Usuarios</title>
+	</h:head>
+	<h:body>
+		<h:form id="FormConsulta">
+			<h:panelGrid columns="2">
+				<h:outputLabel value="Login:" />
+				<h:inputText value="#{usuarioBean.login}"/>
+				<h:outputLabel value="Telefone:" />
+				<h:inputText value="${usuarioBean.telefone}" />
+				
+				<h:commandButton value="Cadastrar Usuário" action="#{usuarioBean.consultaTodosUsuario}" />
+			</h:panelGrid>
+		</h:form>
+		<h:dataTable id="tabelaUsuarios" value="${usuarioBean.lstUsuarioTO}" var="usuario" rows="10">
+			<f:facet name="header">
+				Lista de Usuários
+			</f:facet>
+			<h:outputText value="${usuario.nome}" />
+			<h:outputText value="${usuario.telefone}" />
+		</h:dataTable>
+	</h:body>
+</html>

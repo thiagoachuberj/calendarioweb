@@ -1,5 +1,7 @@
 package br.com.calendweb.login.bean;
 
+import java.io.Serializable;
+
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -13,6 +15,7 @@ import br.com.calendweb.usuario.bean.UsuarioManagedBean;
 import br.com.calendweb.usuario.facade.UsuarioFacadeBean;
 import br.com.calendweb.usuario.facade.UsuarioLocal;
 import br.com.calendweb.usuario.to.UsuarioTO;
+import br.com.calendweb.util.Constantes;
 import br.com.calendweb.util.EncriptaSenha;
 
 /**
@@ -23,8 +26,10 @@ import br.com.calendweb.util.EncriptaSenha;
  */
 @RequestScoped
 @ManagedBean(name = "loginBean")
-public class LoginManagedBean {
+public class LoginManagedBean implements Serializable, Constantes {
 
+	private static final long serialVersionUID = 1L;
+	
 	/** Recupera uma instancia do EJB. */
 	@EJB
 	private UsuarioLocal usuarioFacade;
@@ -52,16 +57,17 @@ public class LoginManagedBean {
 		loginTO.setSenha(EncriptaSenha.encriptaSenha(senha));
 		
 		UsuarioTO usuarioTO = usuarioFacade.buscarUsuarioPorLogin(loginTO);
+		String navigationCase = Constantes.CADASTRAR_USUARIO;
 		
 		if (usuarioTO != null) {
 			usuarioBean.carregaUsuario(usuarioTO);
-			return "/pages/cadastrarUsuario?faces-redirect=true"; //saida para esta pagina .xhtml
 		} else {
 			FacesMessage fm  = new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuário não Encontrado.", "Usuário não Encontrado.");
 			faceContext.addMessage(null, fm);
+			navigationCase = Constantes.HOME;
 		}
 		
-		return null;
+		return navigationCase;
 	}
 
 	/**
