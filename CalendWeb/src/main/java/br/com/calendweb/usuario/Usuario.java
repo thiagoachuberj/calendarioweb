@@ -51,7 +51,17 @@ public interface Usuario {
 	 * Consulta todos os usuários.
 	 * 
 	 *  @return List<UsuarioTO>
+	 *  @throws BusinessException 
 	 */
 	List<UsuarioTO> consultaTodosUsuarios() throws BusinessException;
+	
+	/**
+	 * Consulta usuarios com base nos campos preenchidos no formulario.
+	 * 
+	 * @param usuarioTO 
+	 * @return List<UsuariosTO> 
+	 * @throws BusinessException
+	 */
+	List<UsuarioTO> consultaUsuariosByCampos(UsuarioTO usuarioTO) throws BusinessException;
 	
 }

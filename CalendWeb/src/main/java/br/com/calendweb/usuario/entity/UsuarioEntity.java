@@ -32,8 +32,7 @@ import br.com.calendweb.evento.entity.EventoEntity;
 						query = "select * from " 
 								+ " usuario u ",
 						resultClass = UsuarioEntity.class
-	)
-						
+	)						
 })
 @Entity
 @Table(name = "USUARIO")

@@ -105,9 +105,72 @@ public class GerenciadorUsuarioDAO extends AbstractDAO implements Usuario {
 		return to;
 	}
 	
+	@Override
+	@SuppressWarnings("unchecked")
 	public List<UsuarioTO> consultaTodosUsuarios() throws BusinessException {
 		Query query = getManager().createNamedQuery("consultaTodosUsuario");
-		@SuppressWarnings("unchecked")
+		
+		List<UsuarioEntity> lstUsuarioEntity = (List<UsuarioEntity>) query.getResultList();
+		List<UsuarioTO> lstUsuariosTO = new ArrayList<UsuarioTO>();
+		if (!lstUsuarioEntity.isEmpty()) {
+			for(UsuarioEntity entity: lstUsuarioEntity) {
+				UsuarioTO usuarioTO = (UsuarioTO) convertaEntityParaTO(entity);
+				
+				lstUsuariosTO.add(usuarioTO);
+			}
+		} else {
+			lstUsuariosTO = null;
+		}
+		
+		return lstUsuariosTO;
+	}
+	
+	@Override
+	public List<UsuarioTO> consultaUsuariosByCampos(UsuarioTO usuarioTO) throws BusinessException {
+		StringBuilder sb = new StringBuilder();
+		sb.append("select * from usuario u ");
+		
+		int criterios = 0;
+		
+		if (usuarioTO != null) {
+			sb.append(" where ");
+			
+			if (usuarioTO.getLoginUsuario() != null) {
+				sb.append(" u.login_usuario = :login ");
+				criterios ++;
+			}
+			if (usuarioTO.getNomeUsuario() != null) {
+				if (criterios > 0 ) {
+					sb.append(" and ");
+				} else {
+					sb.append("");
+				}
+				sb.append(" nome_usuario = :nome");
+			}
+			if (usuarioTO.getTelefoneUsuario() != null) {
+				if (criterios > 0 ) {
+					sb.append(" and ");
+				} else {
+					sb.append("");
+				}
+				sb.append("telefone_usuario = :telefone");
+			}	
+		}
+		
+		Query query = getManager().createQuery(sb.toString());
+		
+		if (usuarioTO != null) {
+			if (usuarioTO.getLoginUsuario() != null) {
+				query.setParameter("login", "%" + usuarioTO.getLoginUsuario() + "%");
+			}
+			if (usuarioTO.getNomeUsuario() != null) {
+				query.setParameter("nome", "%" + usuarioTO.getNomeUsuario() + "%");
+			}
+			if (usuarioTO.getTelefoneUsuario() != null) {
+				query.setParameter("telefone", usuarioTO.getTelefoneUsuario());
+			}	
+		}
+		
 		List<UsuarioEntity> lstUsuarioEntity = (List<UsuarioEntity>) query.getResultList();
 		
 		List<UsuarioTO> lstUsuariosTO = new ArrayList<UsuarioTO>();

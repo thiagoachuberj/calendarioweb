@@ -9,6 +9,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 
+import org.w3c.dom.ls.LSResourceResolver;
+
 import br.com.calendweb.exceptions.BusinessException;
 import br.com.calendweb.usuario.facade.UsuarioLocal;
 import br.com.calendweb.usuario.to.UsuarioTO;
@@ -44,8 +46,7 @@ public class UsuarioManagedBean implements Serializable, Constantes{
 	 * @return String 
 	 * @throws BusinessException 
 	 */
-	public String cadastrarUsuario() throws BusinessException {
-		
+	public String cadastraUsuario() throws BusinessException {
 //		FacesContext context = FacesContext.getCurrentInstance();
 //		Application application = context.getApplication();
 		
@@ -71,6 +72,7 @@ public class UsuarioManagedBean implements Serializable, Constantes{
 	 * @return String 
 	 * @throws BusinessException 
 	 */
+	@SuppressWarnings("unchecked")
 	public String consultaTodosUsuario() throws BusinessException {
 		lstUsuarioTO = usuarioFacade.consultaTodosUsuarios();
 		return Constantes.CONSULTA_USUARIOS;
@@ -83,6 +85,53 @@ public class UsuarioManagedBean implements Serializable, Constantes{
 	 */
 	public void carregaUsuario(UsuarioTO usuarioTO){
 		this.usuario = usuarioTO;
+	}
+	
+	/**
+	 * Realiza a pesquisa de usuários com base no preenchimento do formulário.
+	 * 
+	 * @return String 
+	 * @throws BusinessException 
+	 */
+	@SuppressWarnings("unchecked")
+	public String consultaUsuarioByCampos() throws BusinessException {
+		UsuarioTO usuarioTO = new UsuarioTO();
+		
+		if (login != null) {
+			usuarioTO.setLoginUsuario(login);
+		}
+		
+		if (nome != null) {
+			usuarioTO.setNomeUsuario(nome);
+		}
+		
+		if (telefone != null) {
+			usuarioTO.setTelefoneUsuario(telefone);
+		}
+		
+		lstUsuarioTO = usuarioFacade.consultaUsuariosByCampos(usuarioTO);
+		
+		return Constantes.CONSULTA_USUARIOS;
+	}
+	
+	/**
+	 * Atualiza os dados do usuario.
+	 * 
+	 * @return String 
+	 * @throws BusinessException 
+	 */
+	@SuppressWarnings("unchecked")
+	public String atualizaUsuarios() throws BusinessException {
+		UsuarioTO usuarioTO = new UsuarioTO();
+		usuarioTO.setLoginUsuario(login);
+		usuarioTO.setNomeUsuario(nome);
+		usuarioTO.setTelefoneUsuario(telefone);
+		
+		usuarioFacade.atualizaUsuario(usuarioTO);
+		
+		lstUsuarioTO = usuarioFacade.consultaTodosUsuarios();
+		
+		return Constantes.CONSULTA_USUARIOS;
 	}
 	
 	/**

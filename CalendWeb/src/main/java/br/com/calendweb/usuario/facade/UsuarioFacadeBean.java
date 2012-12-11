@@ -59,8 +59,16 @@ public class UsuarioFacadeBean implements UsuarioLocal {
 		getUsuario().setEntityManager(manager);
 	}
 	
+	@Override
+	@SuppressWarnings("unchecked")
 	public List<UsuarioTO> consultaTodosUsuarios() throws BusinessException {
 		return getUsuario().consultaTodosUsuarios();
+	}
+	
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<UsuarioTO> consultaUsuariosByCampos(UsuarioTO usuarioTO) throws BusinessException {
+		return getUsuario().consultaUsuariosByCampos(usuarioTO);
 	}
 	
 	/**

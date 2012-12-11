@@ -8,32 +8,40 @@
 		<title>Consulta Usuarios</title>
 	</h:head>
 	<h:body>
-		<h:form id="FormConsulta">
-			<h:panelGrid columns="2">
-				<h:outputLabel value="Login:" />
-				<h:inputText value="#{usuarioBean.login}"/>
-				<h:outputLabel value="Telefone:" />
-				<h:inputText value="${usuarioBean.telefone}" />
-				
-				<h:commandButton value="Consultar Usuarios" action="#{usuarioBean.consultaTodosUsuario}" />
-			</h:panelGrid>
-		
-		<h:dataTable id="tabelaUsuarios" value="${usuarioBean.lstUsuarioTO}" var="usuario" rows="10">
-			<h:column>
-				<f:facet name="header">
-					Lista de Usuários
-				</f:facet>
-			</h:column>
-			<h:column>
-			<h:outputText value="${usuario.nomeUsuario}" />
-			</h:column>
-			<h:column>
-			<h:outputText value="${usuario.telefoneUsuario}" />
-			</h:column>
-			<h:column>
-			<h:outputText value="${usuario.loginUsuario}" />
-			</h:column>
-		</h:dataTable>
-		</h:form>
+		<f:view>
+			<h:form id="FormConsulta">
+				<h:panelGrid columns="2">
+					<h:outputLabel value="Login:" />
+					<h:inputText value="#{usuarioBean.login}"/>
+					<h:outputLabel value="Telefone:" />
+					<h:inputText value="${usuarioBean.telefone}" />
+					
+					<h:commandButton value="Consultar Usuarios" action="#{usuarioBean.consultaTodosUsuario}" />
+				</h:panelGrid>
+			</h:form>
+			
+			<h:form binding="#{usuariosBean.tableForm}">
+				<h:dataTable id="tabelaUsuarios" value="${usuarioBean.lstUsuarioTO}" var="usuario">
+					<h:column>
+						<f:facet name="header">
+							Nome
+						</f:facet>
+						<h:outputText value="${usuario.nomeUsuario}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							Telefone
+						</f:facet>
+						<h:outputText value="${usuario.telefoneUsuario}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							Login
+						</f:facet>
+						<h:outputText value="${usuario.loginUsuario}" />
+					</h:column>
+				</h:dataTable>
+			</h:form>		
+		</f:view>
 	</h:body>
 </html>
