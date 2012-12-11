@@ -134,6 +134,12 @@ public class UsuarioManagedBean implements Serializable, Constantes{
 		return Constantes.CONSULTA_USUARIOS;
 	}
 	
+	public String deletaUsuario() {
+		
+		
+		return Constantes.CONSULTA_USUARIOS;
+	}
+	
 	/**
 	 * @return the login
 	 */
