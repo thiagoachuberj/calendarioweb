@@ -57,10 +57,10 @@ public class LoginManagedBean implements Serializable, Constantes {
 		loginTO.setSenha(EncriptaSenha.encriptaSenha(senha));
 		
 		UsuarioTO usuarioTO = usuarioFacade.buscarUsuarioPorLogin(loginTO);
-		String navigationCase = Constantes.CADASTRAR_USUARIO;
+		String navigationCase = Constantes.CONSULTA_USUARIOS;
 		
 		if (usuarioTO != null) {
-			usuarioBean.carregaUsuario(usuarioTO);
+			usuarioBean.consultaTodosUsuario();
 		} else {
 			FacesMessage fm  = new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuário não Encontrado.", "Usuário não Encontrado.");
 			faceContext.addMessage(null, fm);

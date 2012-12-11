@@ -1,11 +1,13 @@
 package br.com.calendweb.usuario.bean;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 
 import br.com.calendweb.exceptions.BusinessException;
 import br.com.calendweb.usuario.facade.UsuarioLocal;
@@ -18,7 +20,7 @@ import br.com.calendweb.util.EncriptaSenha;
  * @author MM
  *
  */
-@RequestScoped
+@SessionScoped
 @ManagedBean(name = "usuarioBean")
 public class UsuarioManagedBean implements Serializable, Constantes{
 
@@ -34,7 +36,7 @@ public class UsuarioManagedBean implements Serializable, Constantes{
 	private String nome;
 	private String telefone;
 	private UsuarioTO usuario;
-	private List<UsuarioTO> lstUsuarioTO;
+	private List<UsuarioTO> lstUsuarioTO = new ArrayList<UsuarioTO>();
 	
 	/**
 	 * Método responsável por realizar o cadastro de um usuario.
@@ -71,7 +73,7 @@ public class UsuarioManagedBean implements Serializable, Constantes{
 	 */
 	public String consultaTodosUsuario() throws BusinessException {
 		lstUsuarioTO = usuarioFacade.consultaTodosUsuarios();
-		return Constantes.LISTA_USUARIOS;
+		return Constantes.CONSULTA_USUARIOS;
 	}
 	
 	/**

@@ -21,12 +21,19 @@ import br.com.calendweb.evento.entity.EventoEntity;
  * 
  */
 @NamedNativeQueries ({
-	@NamedNativeQuery (name  =  "consultaUsuario",
+	@NamedNativeQuery (name = "consultaUsuario",
 						query  =  "select * from " 
 								+ "usuario u "
 								+ " where u.login_usuario = :login " 
 								+ " and u.senha_usuario = :senha",
-						resultClass  =  UsuarioEntity.class) 
+						resultClass  =  UsuarioEntity.class
+	),
+	@NamedNativeQuery (name="consultaTodosUsuario",
+						query = "select * from " 
+								+ " usuario u ",
+						resultClass = UsuarioEntity.class
+	)
+						
 })
 @Entity
 @Table(name = "USUARIO")

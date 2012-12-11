@@ -18,5 +18,10 @@
 		   <to-view-id>/pages/cadastrarUsuario.xhtml</to-view-id>
 		   <redirect/>
 	  </navigation-case>
+	  <navigation-case>
+		   <from-outcome>consultaUsuarios</from-outcome>
+		   <to-view-id>/pages/listaUsuarios.xhtml</to-view-id>
+		   <redirect/>
+	  </navigation-case>
  </navigation-rule>
 </faces-config>

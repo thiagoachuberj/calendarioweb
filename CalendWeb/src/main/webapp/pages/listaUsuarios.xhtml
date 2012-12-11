@@ -1,7 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.prime.com.tr/ui">
 
 	<h:head>
 		<title>Consulta Usuarios</title>
@@ -14,15 +15,25 @@
 				<h:outputLabel value="Telefone:" />
 				<h:inputText value="${usuarioBean.telefone}" />
 				
-				<h:commandButton value="Cadastrar Usuário" action="#{usuarioBean.consultaTodosUsuario}" />
+				<h:commandButton value="Consultar Usuarios" action="#{usuarioBean.consultaTodosUsuario}" />
 			</h:panelGrid>
-		</h:form>
+		
 		<h:dataTable id="tabelaUsuarios" value="${usuarioBean.lstUsuarioTO}" var="usuario" rows="10">
-			<f:facet name="header">
-				Lista de Usuários
-			</f:facet>
-			<h:outputText value="${usuario.nome}" />
-			<h:outputText value="${usuario.telefone}" />
+			<h:column>
+				<f:facet name="header">
+					Lista de Usuários
+				</f:facet>
+			</h:column>
+			<h:column>
+			<h:outputText value="${usuario.nomeUsuario}" />
+			</h:column>
+			<h:column>
+			<h:outputText value="${usuario.telefoneUsuario}" />
+			</h:column>
+			<h:column>
+			<h:outputText value="${usuario.loginUsuario}" />
+			</h:column>
 		</h:dataTable>
+		</h:form>
 	</h:body>
 </html>

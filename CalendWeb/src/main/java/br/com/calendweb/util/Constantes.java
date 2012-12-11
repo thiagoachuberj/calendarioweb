@@ -12,5 +12,5 @@ public interface Constantes {
 	public static final String SUCESSO = "sucesso";
 	public static final String HOME = "home";
 	public static final String CADASTRAR_USUARIO = "cadastrarUsuario";
-	public static final String LISTA_USUARIOS = "listaUsuarios";
+	public static final String CONSULTA_USUARIOS = "consultaUsuarios";
 }
