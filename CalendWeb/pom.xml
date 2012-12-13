@@ -106,14 +106,14 @@
 			</configuration>
 			<executions>
 				<execution>
-					<id>install</id>
+					<id>deploy</id>
 					<phase>pre-integration-test</phase>
 					<goals>
 						<goal>undeploy</goal>
 					</goals>
 				</execution>
 				<execution>
-					<id>install</id>
+					<id>undeploy</id>
 					<phase>post-integration-test</phase>
 					<goals>
 						<goal>deploy</goal>
