@@ -2,7 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.prime.com.tr/ui">
+      xmlns:p="http://primefaces.prime.com.tr/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 	<h:head>
 		<title>Consulta Usuarios</title>
@@ -20,40 +21,38 @@
 				</h:panelGrid>
 			</h:form>
 			
-			<h:form binding="#{usuariosBean.tableForm}">
-				<h:dataTable id="tabelaUsuarios" value="${usuarioBean.lstUsuarioTO}" var="usuario">
-					<h:column>
-						<f:facet name="header">
-							Nome
-						</f:facet>
-						<h:outputText value="${usuario.nomeUsuario}" />
-					</h:column>
-					<h:column>
-						<f:facet name="header">
-							Telefone
-						</f:facet>
-						<h:outputText value="${usuario.telefoneUsuario}" />
-					</h:column>
-					<h:column>
-						<f:facet name="header">
-							Login
-						</f:facet>
-						<h:outputText value="${usuario.loginUsuario}" />
-					</h:column>
-					<h:column>
-						<f:facet name="header">
-							Editar
-						</f:facet>
-						<h:commandLink value="editar" action="#{usuario.atualizaUsuarios}"/>
-					</h:column>
-					<h:column>
-						<f:facet name="header">
-							Deletar
-						</f:facet>
-						<h:commandLink value="deletar" action="#{usuario.deletaUsuario}"/>
-					</h:column>
-				</h:dataTable>
-			</h:form>		
+			<!-- <h:dataTable id="tabelaUsuarios" value="#{usuarioBean.lstUsuarioTO}" rendered="#{!empty usuarioBean.lstUsuarioTO}" var="usuario">
+				<h:column>
+					<f:facet name="header">
+						Nome
+					</f:facet>
+					<h:outputText value="${usuario.nomeUsuario}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						Telefone
+					</f:facet>
+					<h:outputText value="${usuario.telefoneUsuario}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						Login
+					</f:facet>
+					<h:outputText value="${usuario.loginUsuario}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						Editar
+					</f:facet>
+					<h:commandLink value="editar" action="#{usuario.atualizaUsuarios}"/>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						Deletar
+					</f:facet>
+					<h:commandLink value="deletar" action="#{usuario.deletaUsuario}"/>
+				</h:column>
+			</h:dataTable> -->
 		</f:view>
 	</h:body>
 </html>

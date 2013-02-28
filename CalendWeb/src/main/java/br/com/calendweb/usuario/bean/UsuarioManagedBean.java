@@ -6,10 +6,7 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
-
-import org.w3c.dom.ls.LSResourceResolver;
 
 import br.com.calendweb.exceptions.BusinessException;
 import br.com.calendweb.usuario.facade.UsuarioLocal;

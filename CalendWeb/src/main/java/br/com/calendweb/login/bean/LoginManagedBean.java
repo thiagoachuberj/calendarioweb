@@ -5,7 +5,7 @@ import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
@@ -24,7 +24,7 @@ import br.com.calendweb.util.EncriptaSenha;
  * 
  * @author mek
  */
-@RequestScoped
+@SessionScoped
 @ManagedBean(name = "loginBean")
 public class LoginManagedBean implements Serializable, Constantes {
 
@@ -97,5 +97,15 @@ public class LoginManagedBean implements Serializable, Constantes {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
+
+	public UsuarioManagedBean getUsuarioBean() {
+		return usuarioBean;
+	}
+
+	public void setUsuarioBean(UsuarioManagedBean usuarioBean) {
+		this.usuarioBean = usuarioBean;
+	}
+	
+	
 	
 }
