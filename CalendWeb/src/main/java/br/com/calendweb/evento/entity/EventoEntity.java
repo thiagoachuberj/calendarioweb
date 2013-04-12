@@ -13,35 +13,35 @@ import java.util.Date;
  * 
  */
 @Entity
-@Table(name="EVENTO")
+@Table(name="evento")
 public class EventoEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="ID_EVENTO")
+	@Column(name="even_id")
 	private int idEvento;
 
-	@Column(name="DESCRICAO_EVENTO")
+	@Column(name="even_descricao")
 	private String descricaoEvento;
 
     @Temporal( TemporalType.DATE)
-	@Column(name="HORA_FIM_EVENTO")
+	@Column(name="even_hr_fim")
 	private Date horaFimEvento;
 
     @Temporal( TemporalType.DATE)
-	@Column(name="HORA_INICIO_EVENTO")
+	@Column(name="even_hr_ini")
 	private Date horaInicioEvento;
 
-	@Column(name="LOCAL_EVENTO")
+	@Column(name="even_local")
 	private String localEvento;
 
-	@Column(name="NOME_EVENTO")
+	@Column(name="even_nome")
 	private String nomeEvento;
 
 	//bi-directional many-to-one association to Usuario
     @ManyToOne
-	@JoinColumn(name="IDF_USUARIO")
+	@JoinColumn(name="even_id_usuario")
 	private UsuarioEntity usuario;
 
     public EventoEntity() {

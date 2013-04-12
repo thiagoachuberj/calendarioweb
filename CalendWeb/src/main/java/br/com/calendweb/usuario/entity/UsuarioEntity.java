@@ -24,8 +24,8 @@ import br.com.calendweb.evento.entity.EventoEntity;
 	@NamedNativeQuery (name = "consultaUsuario",
 						query  =  "select * from " 
 								+ "usuario u "
-								+ " where u.login_usuario = :login " 
-								+ " and u.senha_usuario = :senha",
+								+ " where u.usu_login = :login ", 
+								//+ " and u.usu_senha = :senha",
 						resultClass  =  UsuarioEntity.class
 	),
 	@NamedNativeQuery (name="consultaTodosUsuario",
@@ -35,28 +35,28 @@ import br.com.calendweb.evento.entity.EventoEntity;
 	)						
 })
 @Entity
-@Table(name = "USUARIO")
+@Table(name = "usuario")
 public class UsuarioEntity implements Serializable {
 	private static final long serialVersionUID  =  1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID_USUARIO")
+	@Column(name = "usu_id")
 	private int idUsuario;
 
-	@Column(name = "EMAIL_USUARIO")
+	@Column(name = "usu_email")
 	private String emailUsuario;
 
-	@Column(name = "LOGIN_USUARIO")
+	@Column(name = "usu_login")
 	private String loginUsuario;
 
-	@Column(name = "NOME_USUARIO")
+	@Column(name = "usu_nome")
 	private String nomeUsuario;
 
-	@Column(name = "SENHA_USUARIO")
+	@Column(name = "usu_senha")
 	private byte[] senhaUsuario;
 
-	@Column(name = "TELEFONE_USUARIO")
+	@Column(name = "usu_telefone")
 	private String telefoneUsuario;
 
 	//bi-directional many-to-one association to Evento

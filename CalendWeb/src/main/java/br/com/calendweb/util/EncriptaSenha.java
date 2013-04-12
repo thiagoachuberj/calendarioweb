@@ -42,7 +42,7 @@ public class EncriptaSenha {
 	}
 	
 	public static void main(String []args) {
-		byte []senha = EncriptaSenha.encriptaSenha("123456");
+		byte []senha = EncriptaSenha.encriptaSenha("123");
 		System.out.println(senha.toString());
 	}
 

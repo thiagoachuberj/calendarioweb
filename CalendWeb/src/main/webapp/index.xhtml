@@ -1,43 +1,42 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<!-- ui:composition xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"
-      template="/decorator.xhtml">
-
-	<ui:define name="titulo">Hello World</ui:define>
-	
-	<ui:define name="conteudo">
-		<h1>Seja Bem Vindo</h1>
-		
-		<h:link outcome="cadastrarUsuario" value="Cadastrar usuário"/>
-	</ui:define>
-	
- /ui:composition -->
-
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+      
+	<ui:composition template="/pages/estrutura/home.xhtml">
 	
-	<h:head>
-		<title>Index</title>
-	</h:head>
-	<h:body>
-		<f:view>
-			<h1>Seja Bem Vindo</h1>
-			<div id="loginForm">
-				<h:message />
-				<h:form id="loginForm">
-					<h:panelGrid columns="2" width="100%" border="1">
-						<h:outputLabel value="Login:" for="login" />
-						<h:inputText id="login" value="#{loginBean.login}" required="true" label="Login" />
-						<h:outputLabel value="Senha:" for="senha" />
-						<h:inputSecret id="senha" value="#{loginBean.senha}" />
-					</h:panelGrid>
-					<h:commandButton id="logar"	value="Logar" action="#{loginBean.realizaLogin}" />
-				</h:form>
-			</div>
-		</f:view>
-	</h:body>      
+		<ui:define name="pageTitle">Index</ui:define>
+		
+		<ui:define name="header">
+			<ui:include src="/pages/estrutura/header.xhtml" />
+		</ui:define>
+
+		<ui:define name="body">
+			<f:view>
+				<h1>Seja Bem Vindo</h1>
+				<div id="loginForm">
+					<h:form id="loginForm">
+						<div id="messages" style="text-align: center; color: #FF0000;">
+							<h:messages />
+						</div>
+						<div id="login">
+							<h:outputLabel value="Login:" for="login" />
+							<h:inputText id="login" value="#{loginBean.login}" required="true" label="Login" requiredMessage="Por favor preencher o campo Login!"/>
+						</div>
+						<div id="senha">
+							<h:outputLabel value="Senha:" for="senha" />
+							<h:inputSecret id="senha" value="#{loginBean.senha}" required="true"/>
+						</div>
+						<div id="button">
+							<h:commandButton id="logar"	value="Logar" action="#{loginBean.realizaLogin}" />
+						</div>	
+					</h:form>
+				</div>
+			</f:view>
+		</ui:define>
+		
+	</ui:composition>
+	      
 </html>

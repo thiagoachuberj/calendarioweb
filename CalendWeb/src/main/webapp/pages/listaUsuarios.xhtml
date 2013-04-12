@@ -3,56 +3,61 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.prime.com.tr/ui"
-      xmlns:c="http://java.sun.com/jsp/jstl/core">
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
 
-	<h:head>
-		<title>Consulta Usuarios</title>
-	</h:head>
-	<h:body>
-		<f:view>
-			<h:form id="FormConsulta">
-				<h:panelGrid columns="2">
-					<h:outputLabel value="Login:" />
-					<h:inputText value="#{usuarioBean.login}"/>
-					<h:outputLabel value="Telefone:" />
-					<h:inputText value="${usuarioBean.telefone}" />
-					
-					<h:commandButton value="Consultar Usuarios" action="#{usuarioBean.consultaTodosUsuario}" />
-				</h:panelGrid>
-			</h:form>
-			
-			<!-- <h:dataTable id="tabelaUsuarios" value="#{usuarioBean.lstUsuarioTO}" rendered="#{!empty usuarioBean.lstUsuarioTO}" var="usuario">
-				<h:column>
-					<f:facet name="header">
-						Nome
-					</f:facet>
-					<h:outputText value="${usuario.nomeUsuario}" />
-				</h:column>
-				<h:column>
-					<f:facet name="header">
-						Telefone
-					</f:facet>
-					<h:outputText value="${usuario.telefoneUsuario}" />
-				</h:column>
-				<h:column>
-					<f:facet name="header">
-						Login
-					</f:facet>
-					<h:outputText value="${usuario.loginUsuario}" />
-				</h:column>
-				<h:column>
-					<f:facet name="header">
-						Editar
-					</f:facet>
-					<h:commandLink value="editar" action="#{usuario.atualizaUsuarios}"/>
-				</h:column>
-				<h:column>
-					<f:facet name="header">
-						Deletar
-					</f:facet>
-					<h:commandLink value="deletar" action="#{usuario.deletaUsuario}"/>
-				</h:column>
-			</h:dataTable> -->
-		</f:view>
-	</h:body>
+	<ui:composition template="/pages/estrutura/home.xhtml">
+	
+		<ui:define name="pageTitle">Consulta Usuarios</ui:define>
+		
+		<ui:define name="body">
+			<f:view>
+				<h:form id="FormConsulta">
+					<h:panelGrid columns="2">
+						<h:outputLabel value="Login:" />
+						<h:inputText value="#{usuarioBean.login}"/>
+						<h:outputLabel value="Telefone:" />
+						<h:inputText value="#{usuarioBean.telefone}" />
+						
+						<h:commandButton value="Consultar Usuarios" action="#{usuarioBean.consultaTodosUsuario}" />
+					</h:panelGrid>
+				
+					<h:dataTable id="tabelaUsuarios" value="#{usuarioBean.lstDataModelUsuarioTO}" var="usuario" rendered="#{!empty usuarioBean.lstDataModelUsuarioTO}" >
+						<p:column>
+							<f:facet name="header">
+								Nome
+							</f:facet>
+							<h:outputText value="#{usuario.nomeUsuario}" />
+						</p:column>
+						<h:column>
+							<f:facet name="header">
+								Telefone
+							</f:facet>
+							<h:outputText value="#{usuario.telefoneUsuario}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								Login
+							</f:facet>
+							<h:outputText value="#{usuario.loginUsuario}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								Ações
+							</f:facet>
+							<h:commandLink action="#{usuarioBean.editarUsuario()}" >
+								<h:graphicImage value="/img/icone_editar.png" />
+							</h:commandLink>
+							&#160;
+							<h:commandLink action="#{usuarioBean.deletaUsuario}">
+								<h:graphicImage value="/img/icone_deletar.png" />
+							</h:commandLink>
+						</h:column>
+					</h:dataTable>
+				</h:form>
+			</f:view>			
+		</ui:define>
+		
+	</ui:composition>
+	
 </html>

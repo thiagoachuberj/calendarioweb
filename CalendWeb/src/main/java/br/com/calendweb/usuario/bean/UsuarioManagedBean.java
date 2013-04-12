@@ -1,12 +1,12 @@
 package br.com.calendweb.usuario.bean;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.model.ListDataModel;
 
 import br.com.calendweb.exceptions.BusinessException;
 import br.com.calendweb.usuario.facade.UsuarioLocal;
@@ -15,6 +15,7 @@ import br.com.calendweb.util.Constantes;
 import br.com.calendweb.util.EncriptaSenha;
 
 /**
+ * Managed Bean responsáveis por ações referente ao Usuaário.
  * 
  * @author MM
  *
@@ -35,7 +36,7 @@ public class UsuarioManagedBean implements Serializable, Constantes{
 	private String nome;
 	private String telefone;
 	private UsuarioTO usuario;
-	private List<UsuarioTO> lstUsuarioTO = new ArrayList<UsuarioTO>();
+	private ListDataModel<UsuarioTO> lstDataModelUsuarioTO;
 	
 	/**
 	 * Método responsável por realizar o cadastro de um usuario.
@@ -69,9 +70,11 @@ public class UsuarioManagedBean implements Serializable, Constantes{
 	 * @return String 
 	 * @throws BusinessException 
 	 */
-	@SuppressWarnings("unchecked")
 	public String consultaTodosUsuario() throws BusinessException {
-		lstUsuarioTO = usuarioFacade.consultaTodosUsuarios();
+		List<UsuarioTO> lstUsuarioTO = usuarioFacade.consultaTodosUsuarios();
+		
+		this.lstDataModelUsuarioTO = new ListDataModel<UsuarioTO>(lstUsuarioTO);
+		
 		return Constantes.CONSULTA_USUARIOS;
 	}
 	
@@ -90,25 +93,11 @@ public class UsuarioManagedBean implements Serializable, Constantes{
 	 * @return String 
 	 * @throws BusinessException 
 	 */
-	@SuppressWarnings("unchecked")
-	public String consultaUsuarioByCampos() throws BusinessException {
-		UsuarioTO usuarioTO = new UsuarioTO();
+	public String editarUsuario() throws BusinessException {
+		this.usuario = (UsuarioTO) this.lstDataModelUsuarioTO.getRowData();
+		//lstUsuarioTO = usuarioFacade.consultaUsuariosByCampos(usuarioTO);
 		
-		if (login != null) {
-			usuarioTO.setLoginUsuario(login);
-		}
-		
-		if (nome != null) {
-			usuarioTO.setNomeUsuario(nome);
-		}
-		
-		if (telefone != null) {
-			usuarioTO.setTelefoneUsuario(telefone);
-		}
-		
-		lstUsuarioTO = usuarioFacade.consultaUsuariosByCampos(usuarioTO);
-		
-		return Constantes.CONSULTA_USUARIOS;
+		return Constantes.EDITAR_USUARIO;
 	}
 	
 	/**
@@ -117,7 +106,6 @@ public class UsuarioManagedBean implements Serializable, Constantes{
 	 * @return String 
 	 * @throws BusinessException 
 	 */
-	@SuppressWarnings("unchecked")
 	public String atualizaUsuarios() throws BusinessException {
 		UsuarioTO usuarioTO = new UsuarioTO();
 		usuarioTO.setLoginUsuario(login);
@@ -126,14 +114,17 @@ public class UsuarioManagedBean implements Serializable, Constantes{
 		
 		usuarioFacade.atualizaUsuario(usuarioTO);
 		
-		lstUsuarioTO = usuarioFacade.consultaTodosUsuarios();
+	//	lstUsuarioTO = usuarioFacade.consultaTodosUsuarios();
 		
 		return Constantes.CONSULTA_USUARIOS;
 	}
 	
+	/**
+	 * Realiza a exclusão do usuário em questão.
+	 * 
+	 * @return String 
+	 */
 	public String deletaUsuario() {
-		
-		
 		return Constantes.CONSULTA_USUARIOS;
 	}
 	
@@ -210,15 +201,15 @@ public class UsuarioManagedBean implements Serializable, Constantes{
 	/**
 	 * @return the lstUsuarioTO
 	 */
-	public List<UsuarioTO> getLstUsuarioTO() {
-		return lstUsuarioTO;
+	public ListDataModel<UsuarioTO> getLstDataModelUsuarioTO() {
+		return lstDataModelUsuarioTO;
 	}
 
 	/**
 	 * @param lstUsuarioTO the lstUsuarioTO to set
 	 */
-	public void setLstUsuarioTO(List<UsuarioTO> lstUsuarioTO) {
-		this.lstUsuarioTO = lstUsuarioTO;
+	public void setLstDataModelUsuarioTO(ListDataModel<UsuarioTO> lstDataModelUsuarioTO) {
+		this.lstDataModelUsuarioTO = lstDataModelUsuarioTO;
 	}
 
 }

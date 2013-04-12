@@ -60,10 +60,11 @@ public class LoginManagedBean implements Serializable, Constantes {
 		String navigationCase = Constantes.CONSULTA_USUARIOS;
 		
 		if (usuarioTO != null) {
+			usuarioBean.setUsuario(usuarioTO);
 			usuarioBean.consultaTodosUsuario();
 		} else {
-			FacesMessage fm  = new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuário não Encontrado.", "Usuário não Encontrado.");
-			faceContext.addMessage(null, fm);
+			FacesMessage faceMessage  = new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuário não Encontrado.", null);
+			faceContext.addMessage(null, faceMessage);
 			navigationCase = Constantes.HOME;
 		}
 		

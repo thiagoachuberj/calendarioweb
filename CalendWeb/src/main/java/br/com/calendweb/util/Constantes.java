@@ -9,8 +9,9 @@ package br.com.calendweb.util;
  */
 public interface Constantes {
 
-	public static final String SUCESSO = "sucesso";
-	public static final String HOME = "home";
-	public static final String CADASTRAR_USUARIO = "cadastrarUsuario";
-	public static final String CONSULTA_USUARIOS = "consultaUsuarios";
+	public static final String SUCESSO = "/pages/sucesso.xhtml";
+	public static final String HOME = "/index.xhtml";
+	public static final String CADASTRAR_USUARIO = "/pages/cadastrarUsuario.xhtml";
+	public static final String CONSULTA_USUARIOS = "/pages/listaUsuarios.xhtm";
+	public static final String EDITAR_USUARIO = "/pages/editarUsuario.xhtm";
 }

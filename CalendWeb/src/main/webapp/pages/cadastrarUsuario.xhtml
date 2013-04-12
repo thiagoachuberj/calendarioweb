@@ -7,7 +7,7 @@
 		<title>Cadastrar Usuario</title>
 	</h:head>
 	<h:body>
-		<h:form id="Form">
+		<h:form id="formCadastraUsuario">
 			<h:panelGrid columns="2">
 				<h:outputText value="Cadastrar Usuário"/> <br></br>
 				<h:outputText value="Login" />
@@ -19,7 +19,7 @@
 				<h:outputText value="telefone" />
 				<h:inputText value="#{usuarioBean.telefone}"/>
 				
-				<h:commandButton value="Cadastrar Usuário" action="#{usuarioBean.cadastrarUsuario()}" />
+				<h:commandButton value="Cadastrar Usuário" action="#{usuarioBean.cadastraUsuario}" />
 			</h:panelGrid>
 		</h:form>
 	</h:body>

@@ -38,7 +38,7 @@ public class GerenciadorUsuarioDAO extends AbstractDAO implements Usuario {
 		try {
 			Query query = getManager().createNamedQuery("consultaUsuario");
 			query.setParameter("login", loginTO.getLogin());
-			query.setParameter("senha", loginTO.getSenha());
+			//query.setParameter("senha", loginTO.getSenha());
 			
 			UsuarioEntity entity = (UsuarioEntity) query.getSingleResult();
 			to = (UsuarioTO) convertaEntityParaTO(entity);
