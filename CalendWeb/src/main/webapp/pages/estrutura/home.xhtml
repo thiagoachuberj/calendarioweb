@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+      
+   	<!-- f:loadBundle basename="resources" var="msg" / -->
+	<h:head>
+		<title>CalendWeb - <ui:insert name="pageTitle">Título da página</ui:insert></title>
+		
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		
+		<style type="text/css">
+			body {
+				  font-family: Verdana, Arial, Helvetica, sans-serif;
+				  font-size: 14px;
+			}
+			.header {
+				  font-family: Verdana, Arial, Helvetica, sans-serif;
+				  font-size: 18px;
+			}
+			.bottom {
+				  font-family: Verdana, Arial, Helvetica, sans-serif;
+				  font-size: 9px;
+				  text-align: center;
+				  vertical-align: middle;
+				  color: #8E969D;
+			}
+		</style>
+	</h:head>
+
+	<h:body bgcolor="#ffffff">
+		<div id="principal" style="border:1px solid #CAD6E0">
+		
+			<div id="header" class="header" style="color:#E4EBEB" align="center">
+				<ui:insert name="header">
+					<ui:include src="/pages/estrutura/header.xhtml" />
+				</ui:insert>
+			</div>
+	
+			<div id="body">
+				<ui:insert name="body">Page Body</ui:insert>
+			</div>
+
+			<div id="footer" align="right">
+				<div style="color:#CAD6E0">
+					<ui:insert name="footer">Page Footer</ui:insert>
+				</div>
+			</div>
+			
+		</div>
+	</h:body>
+		
+</html>

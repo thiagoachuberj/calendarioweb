@@ -17,24 +17,30 @@ public class FactoryDAOImpl implements FactoryDAO {
 	
 	@PersistenceContext(unitName = "calendWebUnit")
 	private EntityManager manager;
-	
+
 	@Override
 	public Usuario getUsuario() {
-		return new GerenciadorUsuarioDAO(manager);
+		// TODO Auto-generated method stub
+		return null;
 	}
+	
+/*	@Override
+	public Usuario getUsuario() {
+		return new GerenciadorUsuarioDAO(manager);
+	}*/
 
 	/**
 	 * @return the manager
 	 */
-	public EntityManager getManager() {
+/*	public EntityManager getManager() {
 		return manager;
 	}
 
-	/**
+	*//**
 	 * @param manager the manager to set
-	 */
+	 *//*
 	public void setManager(EntityManager manager) {
 		this.manager = manager;
 	}
-
+*/
 }

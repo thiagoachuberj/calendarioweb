@@ -7,6 +7,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
 import br.com.calendweb.dao.AbstractDAO;
 import br.com.calendweb.evento.entity.EventoEntity;
 import br.com.calendweb.exceptions.BusinessException;
@@ -21,21 +24,21 @@ import br.com.calendweb.usuario.to.UsuarioTO;
  * 
  * @author MM
  */
-public class GerenciadorUsuarioDAO extends AbstractDAO implements Usuario {
+public class GerenciadorUsuarioDAO extends AbstractDAO<BaseTO> implements Usuario {
 
 	/**
 	 * Construtor.
 	 * @param manager 
 	 */
-	public GerenciadorUsuarioDAO(EntityManager manager) {
+	/*public GerenciadorUsuarioDAO(EntityManager manager) {
 		this.setManager(manager);
-	}
+	}*/
 	
 	@Override
 	public UsuarioTO buscarUsuarioPorLogin(LoginTO loginTO)	throws BusinessException {
 		UsuarioTO to = null;
 		
-		try {
+		/*try {
 			Query query = getManager().createNamedQuery("consultaUsuario");
 			query.setParameter("login", loginTO.getLogin());
 			//query.setParameter("senha", loginTO.getSenha());
@@ -45,8 +48,10 @@ public class GerenciadorUsuarioDAO extends AbstractDAO implements Usuario {
 		} catch (NoResultException ex) {
 			return null;
 		}
-
-		return to;
+*/
+		Session session = getSessionFactory().openSession();
+		return (UsuarioTO) session.load(UsuarioTO.class, loginTO.getLogin());
+		
 	}
 
 	@Override
