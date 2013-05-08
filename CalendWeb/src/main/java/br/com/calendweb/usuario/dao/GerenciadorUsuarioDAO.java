@@ -7,10 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-
-import br.com.calendweb.dao.AbstractDAO;
+import br.com.calendweb.dao.JPAAbstractDAO;
 import br.com.calendweb.evento.entity.EventoEntity;
 import br.com.calendweb.exceptions.BusinessException;
 import br.com.calendweb.login.to.LoginTO;
@@ -24,46 +21,51 @@ import br.com.calendweb.usuario.to.UsuarioTO;
  * 
  * @author MM
  */
-public class GerenciadorUsuarioDAO extends AbstractDAO<BaseTO> implements Usuario {
+public class GerenciadorUsuarioDAO extends JPAAbstractDAO implements Usuario {
 
-	/**
-	 * Construtor.
-	 * @param manager 
-	 */
-	/*public GerenciadorUsuarioDAO(EntityManager manager) {
+	public GerenciadorUsuarioDAO(EntityManager manager) {
 		this.setManager(manager);
-	}*/
-	
+	}
+
 	@Override
 	public UsuarioTO buscarUsuarioPorLogin(LoginTO loginTO)	throws BusinessException {
 		UsuarioTO to = null;
 		
-		/*try {
+		try {
 			Query query = getManager().createNamedQuery("consultaUsuario");
 			query.setParameter("login", loginTO.getLogin());
-			//query.setParameter("senha", loginTO.getSenha());
+			query.setParameter("senha", loginTO.getSenha());
 			
 			UsuarioEntity entity = (UsuarioEntity) query.getSingleResult();
 			to = (UsuarioTO) convertaEntityParaTO(entity);
+			
+			/***** Hibernate configuration *****/
+			/*Session session = getSessionFactory().openSession();
+			//Transaction transaction = session.beginTransaction();
+			Query query = (Query) session.createCriteria("from usuario as u where u.usu_login = :login");
+			query.setParameter("login", loginTO.getLogin());
+			
+			UsuarioEntity entity = (UsuarioEntity) query.getSingleResult();
+			
+			to = (UsuarioTO) convertaEntityParaTO(entity);*/
+			
 		} catch (NoResultException ex) {
 			return null;
 		}
-*/
-		Session session = getSessionFactory().openSession();
-		return (UsuarioTO) session.load(UsuarioTO.class, loginTO.getLogin());
-		
+
+		return to;
 	}
 
 	@Override
 	public void cadastraUsuario(UsuarioTO usuarioTO) throws BusinessException {
 		UsuarioEntity entity = (UsuarioEntity) convertaTOParaEntity(usuarioTO);
-		getManager().persist(entity);
+//		getManager().persist(entity);
 	}
 
 	@Override
 	public void atualizaUsuario(UsuarioTO usuarioTO) throws BusinessException {
 		UsuarioEntity entity = (UsuarioEntity) convertaTOParaEntity(usuarioTO);
-		getManager().merge(entity);
+//		getManager().merge(entity);
 	}
 	
 	@Override
@@ -113,7 +115,7 @@ public class GerenciadorUsuarioDAO extends AbstractDAO<BaseTO> implements Usuari
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<UsuarioTO> consultaTodosUsuarios() throws BusinessException {
-		Query query = getManager().createNamedQuery("consultaTodosUsuario");
+		/*Query query = getManager().createNamedQuery("consultaTodosUsuario");
 		
 		List<UsuarioEntity> lstUsuarioEntity = (List<UsuarioEntity>) query.getResultList();
 		List<UsuarioTO> lstUsuariosTO = new ArrayList<UsuarioTO>();
@@ -128,7 +130,7 @@ public class GerenciadorUsuarioDAO extends AbstractDAO<BaseTO> implements Usuari
 		}
 		
 		return lstUsuariosTO;
-	}
+*/	return null;}
 	
 	@Override
 	public List<UsuarioTO> consultaUsuariosByCampos(UsuarioTO usuarioTO) throws BusinessException {
@@ -162,9 +164,9 @@ public class GerenciadorUsuarioDAO extends AbstractDAO<BaseTO> implements Usuari
 			}	
 		}
 		
-		Query query = getManager().createQuery(sb.toString());
+//		Query query = getManager().createQuery(sb.toString());
 		
-		if (usuarioTO != null) {
+	/*	if (usuarioTO != null) {
 			if (usuarioTO.getLoginUsuario() != null) {
 				query.setParameter("login", "%" + usuarioTO.getLoginUsuario() + "%");
 			}
@@ -177,9 +179,9 @@ public class GerenciadorUsuarioDAO extends AbstractDAO<BaseTO> implements Usuari
 		}
 		
 		@SuppressWarnings("unchecked")
-		List<UsuarioEntity> lstUsuarioEntity = (List<UsuarioEntity>) query.getResultList();
+		List<UsuarioEntity> lstUsuarioEntity = (List<UsuarioEntity>) query.getResultList();*/
 		
-		List<UsuarioTO> lstUsuariosTO = new ArrayList<UsuarioTO>();
+/*		List<UsuarioTO> lstUsuariosTO = new ArrayList<UsuarioTO>();
 		if (!lstUsuarioEntity.isEmpty()) {
 			for(UsuarioEntity entity: lstUsuarioEntity) {
 				UsuarioTO usuario = (UsuarioTO) convertaEntityParaTO(entity);
@@ -191,11 +193,12 @@ public class GerenciadorUsuarioDAO extends AbstractDAO<BaseTO> implements Usuari
 		}
 		
 		return lstUsuariosTO;
-	}
-	
+*/	return null;}
+
 	@Override
 	public void setEntityManager(EntityManager manager) {
-		this.setManager(manager);
+		// TODO Auto-generated method stub
+		
 	}
 
 }
