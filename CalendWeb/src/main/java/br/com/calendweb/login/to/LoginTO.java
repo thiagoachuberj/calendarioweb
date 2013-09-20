@@ -11,7 +11,14 @@ public class LoginTO extends BaseTO{
 	private static final long serialVersionUID = 1L;
 	private String login;
 	private byte[] senha;
+	private String senhaStr;
 	
+	public String getSenhaStr() {
+		return senhaStr;
+	}
+	public void setSenhaStr(String senhaStr) {
+		this.senhaStr = senhaStr;
+	}
 	public String getLogin() {
 		return login;
 	}

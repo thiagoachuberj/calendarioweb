@@ -2,18 +2,18 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui"
+      xmlns:p="http://primefaces.prime.com.tr/ui"
       xmlns:ui="http://java.sun.com/jsf/facelets">
       
 	<ui:composition template="/pages/estrutura/home.xhtml">
 	
 		<ui:define name="pageTitle">Index</ui:define>
 		
-		<ui:define name="header">
+		<ui:define name="header" class="ui-widget ui-widget-header">
 			<ui:include src="/pages/estrutura/header.xhtml" />
 		</ui:define>
 
-		<ui:define name="body">
+		<ui:define name="body" class="ui-widget ui-widget-header">
 			<f:view>
 				<h1>Seja Bem Vindo</h1>
 				<div id="loginForm">

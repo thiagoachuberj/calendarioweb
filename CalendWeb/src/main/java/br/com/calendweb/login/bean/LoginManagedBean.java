@@ -54,7 +54,8 @@ public class LoginManagedBean implements Serializable, Constantes {
 		faceContext = FacesContext.getCurrentInstance();
 		LoginTO loginTO = new LoginTO();
 		loginTO.setLogin(login);
-		loginTO.setSenha(EncriptaSenha.encriptaSenha(senha));
+//		loginTO.setSenha(EncriptaSenha.encriptaSenha(senha));
+		loginTO.setSenhaStr(senha);
 		
 		UsuarioTO usuarioTO = usuarioFacade.buscarUsuarioPorLogin(loginTO);
 		String navigationCase = Constantes.CONSULTA_USUARIOS;
